@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -31,6 +32,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.shareFab.setOnClickListener {
             shareFile()
+            Toast(this).apply {
+                this.duration = Toast.LENGTH_LONG
+                view = layoutInflater.inflate(R.layout.toast_layout,findViewById(R.id.toastMain))
+
+            }.show()
 
         }
 
