@@ -1,5 +1,7 @@
 package com.example.exercise
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
@@ -7,9 +9,9 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.exercise.databinding.ActivityMainBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,11 +26,8 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
+
 
         binding.shareFab.setOnClickListener {
             shareFile()
@@ -39,6 +38,29 @@ class MainActivity : AppCompatActivity() {
             }.show()
 
         }
+        binding.messageFab.setOnClickListener {
+            Snackbar.make(it,"silmek istedinize eminmisiniz",Snackbar.LENGTH_INDEFINITE).apply {
+                this.setBackgroundTint(resources.getColor(R.color.black))
+                this.setAction("He aq") {
+
+
+                }
+            }.show()
+        }
+        binding.alertDialog.setOnClickListener {
+            alertDialog()
+        }
+        binding.alertDialog2.setOnClickListener {
+            setItemDialog()
+        }
+        binding.singleChoiceDialog.setOnClickListener {
+            singleChoiceDialog()
+        }
+        binding.alertDialog4.setOnClickListener {
+            multiConfirmDialog()
+        }
+
+
 
 
     }
@@ -88,8 +110,74 @@ class MainActivity : AppCompatActivity() {
             binding.messageFab.startAnimation(rotateTo)
         }
     }
+    private fun alertDialog(){
+        val alertDialog = MaterialAlertDialogBuilder(this,R.style.AlertDialogTheme)
+            .setTitle("Alert Dialog")
+            .setMessage("Silmek işlemini onaylıyor musunuz")
+            .setCancelable(false)
+            .setIcon(R.drawable.fav_icon_foreground)
+            .setPositiveButton("Evet"){_,_ ->
+                Toast(this).apply {
+                    this.duration=Toast.LENGTH_SHORT
+                    view=layoutInflater.inflate(R.layout.toast_layout,findViewById(R.id.toastMain))
+                    this.show()
+                }
+            }
+            .setNegativeButton("Hayır"){_,_ ->
+                Toast.makeText(this,"Silinmedi",Toast.LENGTH_LONG).show()
+            }
+            .create()
+        alertDialog.show()
 
+    }
+    val list= arrayOf("item1","item2","item3","item3")
 
+    private fun setItemDialog(){
+        val alertDialog=MaterialAlertDialogBuilder(this,R.style.AlertDialogTheme)
+            .setTitle("Başlık Kısmı")
+            .setItems(list){_,which->
+                Toast.makeText(this,list[which],Toast.LENGTH_SHORT).show()
+            }
+            .setPositiveButton("Tamam"){_,_->
+                Toast.makeText(this,"Tamamlandı",Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton("İptal"){_,_->
+                Toast.makeText(this,"İptal Edildi",Toast.LENGTH_SHORT).show()
+            }
 
+            .create()
+        alertDialog.show()
+    }
 
+    private fun singleChoiceDialog(){
+        val alertDialog = MaterialAlertDialogBuilder(this,R.style.AlertDialogTheme)
+            .setTitle("Başlık Kısmı")
+            .setSingleChoiceItems(list,0){_,which->
+                Toast.makeText(this,list[which],Toast.LENGTH_SHORT).show()
+            }
+            .setPositiveButton("Tamam"){_,_->
+                Toast.makeText(this,"Tamamlandı",Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton("İptal"){_,_->
+                Toast.makeText(this,"İptal Edildi",Toast.LENGTH_SHORT).show()
+            }
+            .create()
+            alertDialog.show()
+    }
+    private fun multiConfirmDialog(){
+        val alertDialog=MaterialAlertDialogBuilder(this,R.style.AlertDialogTheme)
+            .setTitle("Başlık Kısmı")
+            .setMultiChoiceItems(list,booleanArrayOf(false,false,false,false)){_,which,isChecked->
+                Toast.makeText(this,list[which],Toast.LENGTH_SHORT).show()
+
+            }
+            .setPositiveButton("Tamam"){_,_->
+                Toast.makeText(this,"Tamamlandı",Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton("İptal"){_,_->
+                Toast.makeText(this,"İptal Edildi",Toast.LENGTH_SHORT).show()
+            }
+            .create()
+        alertDialog.show()
+    }
 }
