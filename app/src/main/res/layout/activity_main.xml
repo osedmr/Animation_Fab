@@ -8,11 +8,12 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_margin="24dp"
         android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -21,36 +22,37 @@
             android:id="@+id/messageFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginBottom="10dp"
 
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
             android:visibility="invisible"
             app:fabSize="mini"
-            android:focusable="true"
-            android:layout_marginBottom="10dp"
-            android:clickable="true"
             app:srcCompat="@drawable/message" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/mailFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:fabSize="mini"
-            android:visibility="invisible"
             android:layout_marginBottom="10dp"
+            android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
+            android:visibility="invisible"
+            app:fabSize="mini"
             app:srcCompat="@drawable/mail" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/copyFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:clickable="true"
-            app:fabSize="mini"
-            android:visibility="invisible"
-            android:layout_marginBottom="10dp"
             android:focusable="true"
+            android:visibility="invisible"
+            app:fabSize="mini"
             app:srcCompat="@drawable/copy" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -104,5 +106,29 @@
         android:text="dialog 4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/permission"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Permissions"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/singleChoiceDialog"
+        app:layout_constraintVertical_bias="0.221" />
+
+    <Button
+        android:id="@+id/toActivity2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="toActivity2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/permission"
+        app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,11 @@
 <resources>
 
     <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
-        <item name="colorSurface" >#73B9E4</item>
+        <item name="colorSurface" >#F1FAFF</item>
+        <item name="colorControlActivated">#FF6D00</item>
+
+        <!-- Çerçeve rengi seçim yapılmadığında -->
+        <item name="colorControlNormal">#FFD600</item>
         <item name="android:backgroundDimAmount">0.9</item>
         <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text</item>
         <item name="materialAlertDialogBodyTextStyle">@style/BodyTextStyle</item>
@@ -15,7 +19,7 @@
     </style>
 
     <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">#000000</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Inverse</item>
@@ -33,7 +37,7 @@
         <item name="android:strokeColor">#FFFFFF</item>"
     </style>
     <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">#7A7A7A</item>
         <item name="android:strokeColor">#000000</item>"
     </style>
     <style name="ShapeDialogStyle" parent="ShapeAppearance.MaterialComponents.MediumComponent">
@@ -44,12 +48,6 @@
         <item name="android:textColor">#FFD600</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
-    </style>
-    <style name="MultiChoiceItemStyle">
-        <item name="android:padding">16dp</item>
-        <item name="android:background">@android:color/white</item>
-        <item name="android:textColor">#000000</item>
-        <item name="android:textSize">18sp</item>
-    </style>
 
+    </style>
 </resources>

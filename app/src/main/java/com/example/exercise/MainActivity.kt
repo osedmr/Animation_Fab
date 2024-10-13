@@ -1,14 +1,20 @@
 package com.example.exercise
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.exercise.databinding.ActivityMainBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -28,6 +34,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+        binding.toActivity2.setOnClickListener {
+            val intent = Intent(this,MainActivity2::class.java)
+            startActivity(intent)
+        }
 
         binding.shareFab.setOnClickListener {
             shareFile()
@@ -58,6 +68,11 @@ class MainActivity : AppCompatActivity() {
         }
         binding.alertDialog4.setOnClickListener {
             multiConfirmDialog()
+        }
+
+
+        binding.permission.setOnClickListener {
+            requestPermission()
         }
 
 
@@ -179,5 +194,51 @@ class MainActivity : AppCompatActivity() {
             }
             .create()
         alertDialog.show()
+    }
+
+
+    private fun readImagePermission():Boolean{
+        return ActivityCompat.checkSelfPermission(this,Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED
+    }
+    private fun coarseLocationPermission():Boolean{
+        return ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+    }
+    private fun fineLocationPermission():Boolean{
+       return ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestPermission() {
+        var permissionList = mutableListOf<String>()
+        if (!readImagePermission()){
+            permissionList.add(Manifest.permission.READ_MEDIA_IMAGES)
+        }
+        if (!coarseLocationPermission()){
+            permissionList.add(Manifest.permission.ACCESS_COARSE_LOCATION)
+        }
+        if (!fineLocationPermission()){
+            permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+        if (permissionList.isNotEmpty()){
+            ActivityCompat.requestPermissions(this,permissionList.toTypedArray(),0)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 0 && grantResults.isNotEmpty()){
+            for (i in grantResults.indices){
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(this,"${permissions[i]} izin verildi",Toast.LENGTH_SHORT).show()
+                    Log.d("osman","${permissions[i]} izin verildi")
+                }else{
+                    Toast.makeText(this,"${permissions[i]} izin verilmedi",Toast.LENGTH_SHORT).show()
+                    Log.d("osman","${permissions[i]} izin verilmedi")
+                }
+            }
+        }
     }
 }
